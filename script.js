@@ -25,7 +25,15 @@ const LinkedList = (head = null) => {
         return `Size: ${counter}`;
     }
 
-    return {head: head, prepend, append, size};
+    const getTail = function() {
+        let currentNode = this.head;
+        while (currentNode.next) {
+            currentNode = currentNode.next;
+        }
+        return currentNode;
+    }
+
+    return {head: head, prepend, append, size, getTail};
 }
 
 const Node = (value = null) => {
@@ -44,3 +52,4 @@ console.log(list.head.next.value)
 console.log(list.head.next.next.value)
 console.log(list.head.next.next.next.value)
 console.log(list.size());
+console.log(list.getTail());
