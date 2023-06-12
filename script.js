@@ -1,11 +1,21 @@
 const LinkedList = (head = null) => {
     
-    const prepend = function(value) {
-        const newNode = Node(value);
-        newNode.next = this.head;
-        this.head = newNode;
+    const append = function(element) {
+        const lastNode = Node(element);
+        let currentNode = this.head;
+        while (currentNode.next) {
+            currentNode = currentNode.next;
+        }
+        currentNode.next = lastNode;
     }
-    return {head: head, prepend};
+
+    const prepend = function(element) {
+        const firstNode = Node(element);
+        firstNode.next = this.head;
+        this.head = firstNode;
+    }
+    
+    return {head: head, prepend, append};
 }
 
 const Node = (value = null) => {
@@ -18,6 +28,8 @@ node1.next = node2;
 
 const list = LinkedList(node1);
 list.prepend(8);
+list.append(9);
 console.log(list.head.value);
 console.log(list.head.next.value)
 console.log(list.head.next.next.value)
+console.log(list.head.next.next.next.value)
