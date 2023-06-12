@@ -74,7 +74,16 @@ const LinkedList = (head = null) => {
         return null;
     }
 
-    return {head: head, prepend, append, size, getTail, at, pop, contains, find};
+    const toString = function() {
+        let currentNode = this.head;
+        while (currentNode) {
+            console.log(`( ${currentNode.value} ) -> `)
+            currentNode = currentNode.next;
+        }
+        console.log('null');
+    }
+
+    return {head: head, prepend, append, size, getTail, at, pop, contains, find, toString};
 }
 
 const Node = (value = null) => {
@@ -104,3 +113,4 @@ console.log(list.contains(5));
 console.log(list.contains(67));
 console.log(list.find(5));
 console.log(list.find(67));
+list.toString();
