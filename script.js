@@ -41,7 +41,20 @@ const LinkedList = (head = null) => {
         return currentNode;
     }
 
-    return {head: head, prepend, append, size, getTail, at};
+    const pop = function() {
+        if (!this.head) return;
+        if (!this.head.next) {
+            this.head = null;
+            return;
+        }
+        let currentNode = this.head;
+        while (currentNode.next.next) {
+            currentNode = currentNode.next;
+        }
+        currentNode.next = null;
+    }
+
+    return {head: head, prepend, append, size, getTail, at, pop};
 }
 
 const Node = (value = null) => {
@@ -62,3 +75,8 @@ console.log(list.head.next.next.next.value)
 console.log(list.size());
 console.log(list.getTail());
 console.log(list.at(2));
+list.pop();
+console.log(list.head.value);
+console.log(list.head.next.value)
+console.log(list.head.next.next.value)
+console.log(list.head.next.next.next)
