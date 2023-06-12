@@ -83,7 +83,46 @@ const LinkedList = (head = null) => {
         console.log('null');
     }
 
-    return {head: head, prepend, append, size, getTail, at, pop, contains, find, toString};
+    const insertAt = function(element, index) {
+        let newNode = Node(element);
+        if (index === 0) {
+            newNode.next = this.head;
+            this.head = newNode;
+            return;
+        }
+        let currentNode = this.head;
+        let prevNode = null;
+        let counter = 0;
+        while (currentNode && counter < index) {
+            prevNode = currentNode;
+            currentNode = currentNode.next;
+            counter++;
+        }
+        if (counter === index) {
+            newNode.next = currentNode;
+            prevNode.next = newNode;
+        }
+    }
+
+    const removeAt = function(index) {
+        if (index === 0) {
+            this.head = this.head.next;
+            return;
+        }
+        let currentNode = this.head;
+        let prevNode = null;
+        let counter = 0;
+        while (currentNode && counter < index) {
+            prevNode = currentNode;
+            currentNode = currentNode.next;
+            counter++;
+        }
+        if (counter === index) {
+            prevNode.next = currentNode.next;
+        }
+    }
+
+    return {head: head, prepend, append, size, getTail, at, pop, contains, find, toString, insertAt, removeAt};
 }
 
 const Node = (value = null) => {
@@ -97,20 +136,14 @@ node1.next = node2;
 const list = LinkedList(node1);
 list.prepend(8);
 list.append(9);
+list.insertAt(25, 1);
 console.log(list.head.value);
 console.log(list.head.next.value)
 console.log(list.head.next.next.value)
 console.log(list.head.next.next.next.value)
-console.log(list.size());
-console.log(list.getTail());
-console.log(list.at(2));
-list.pop();
+console.log(list.head.next.next.next.next.value)
+list.removeAt(1);
 console.log(list.head.value);
 console.log(list.head.next.value)
 console.log(list.head.next.next.value)
-console.log(list.head.next.next.next)
-console.log(list.contains(5));
-console.log(list.contains(67));
-console.log(list.find(5));
-console.log(list.find(67));
-list.toString();
+console.log(list.head.next.next.next.value)
